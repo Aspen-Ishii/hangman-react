@@ -1,11 +1,14 @@
 import {useState} from "react"
 import words from "./wordList.json"
+import { HangmanDrawing } from "./HangmandDrawing"
+import { HangmanWord } from "./HangmanWord"
+import { Keyboard } from "./Keyboard"
 
 function App () {
   const [wordToGuess, setWordToGuess] = useState (() => {
     return words [Math.floor(Math.random() * words.length)]
   })
-  const [guessedLetters, setGuessedLetters] =usedState<string[]>([])
+  const [guessedLetters, setGuessedLetters] = useState <string[]>([])
 
 
   console.log(wordToGuess)
@@ -20,8 +23,11 @@ function App () {
       alignItems: "center",
     }}
     >
-    <div style = {{ fontSize: "2rem", textAlign: "center"}}>Lose Win</div>
+    <div style = {{ fontSize: "2rem", textAlign: "center"}}>Lose Win
+    </div>
      <HangmanDrawing/> 
+     <HangmanWord />
+     <Keyboard />
     </div>
   )
 }
