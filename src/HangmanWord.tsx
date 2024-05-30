@@ -1,6 +1,6 @@
 export function HangmanWord() {
     const word = "test"
-    const guessedLetters = ["t", "e", ]
+    const guessedLetters = ["t", "e", "a" ]
     return (
     <div 
         style ={{ 
@@ -9,7 +9,8 @@ export function HangmanWord() {
             fontSize: "6rem",
             fontWeight: "bold",
             textTransform: "uppercase",
-            fontFamily: "monospace",
+            fontFamily: 'Rubik Mono One',
+            color: "#53565a",
         }}>
 {/* render the wordToGuess by slitting it apart into its individual letters.
 note: Index is the unique id for the word and thus can be used as an exception for the key*/}

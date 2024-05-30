@@ -27,7 +27,10 @@ function App () {
     </div>
      <HangmanDrawing/> 
      <HangmanWord />
-     <Keyboard />
+      <div className="container" style={{alignSelf: "stretch"}}>
+        <Keyboard />
+      </div>
+      <button id="new-game">New game</button>
     </div>
   )
 }

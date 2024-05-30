@@ -25,12 +25,12 @@ const BODY = (
 const R_ARM = (
     <div 
     style={{
-        width: '100px',
+        width: '70px',
         height: "10px",
         background: "black",
         position: "absolute",
         top: "150px",
-        right: "-100px",
+        right: "-70px",
         rotate: "-30deg",
         transformOrigin: "left bottom",
     }} />
@@ -38,7 +38,7 @@ const R_ARM = (
 const L_ARM = (
     <div 
     style={{
-        width: '100px',
+        width: '70px',
         height: "10px",
         background: "black",
         position: "absolute",

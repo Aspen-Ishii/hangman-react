@@ -1,0 +1,44 @@
+*:focus {
+	outline: none;
+	box-shadow: 0 0 0 4px #ffd100;
+}
+
+
+.btn {
+    display: flex;
+	align-items: center;
+	justify-content: center;
+    padding: 0.4em .5em 0.3em .5em;
+    width: auto;
+    line-height: 1;
+    border: 3px solid #53565a;
+    color: #53565a;
+    background: lighten(#7ba7bc, 30%);
+    box-shadow: 4px 4px 0 0 #7ba7bc;
+    position: relative;
+	overflow: hidden;
+	transform-origin: bottom right;
+    aspect-ratio: 1/1;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    padding: .5rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.btn.active {
+    background-color: hsl(200, 100%, 50%);
+    color: white;
+}
+
+.btn.inactive {
+ opacity: .3;
+}
+
+.btn:hover:not(:disabled),
+.btn:focus.btn:not(:disabled) {
+    background-color: hsl(200, 100%, 75%);
+    transform: translate(-1px, -1px);
+	box-shadow: 6px 6px 0 0 #7ba7bc;
+}
