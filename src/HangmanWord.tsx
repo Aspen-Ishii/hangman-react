@@ -1,9 +1,10 @@
 type HangmanWordProps = {
     guessedLetters: string[]
     wordToGuess: string
+    reveal? : boolean
 }
 
-export function HangmanWord({guessedLetters, wordToGuess}: HangmanWordProps) {
+export function HangmanWord({guessedLetters, wordToGuess, reveal= false}: HangmanWordProps) {
     return (
     <div 
         style ={{ 
@@ -22,9 +23,10 @@ note: Index is the unique id for the word and thus can be used as an exception f
             <span key={index} style={{ borderBottom: ".1em solid black" }}>
                 <span
                 style={{
-                    visibility: guessedLetters.includes(letter) 
+                    visibility: guessedLetters.includes(letter) || reveal
                     ? "visible" 
-                    : "hidden"
+                    : "hidden",
+                    color: !guessedLetters.includes(letter) && reveal ? "red" : "black",
                 }}
                 >
                 {letter}
