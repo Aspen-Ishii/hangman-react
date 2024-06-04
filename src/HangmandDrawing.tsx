@@ -1,6 +1,6 @@
 /** Hangman body*/
 const HEAD = (
-    <div 
+    <div key="head"
     style={{
         width: '50px',
         height: "50px",
@@ -12,7 +12,7 @@ const HEAD = (
     }} />
 )
 const BODY = (
-    <div 
+    <div key="body"
     style={{
         width: '10px',
         height: "100px",
@@ -23,7 +23,7 @@ const BODY = (
     }} />
 )
 const R_ARM = (
-    <div 
+    <div key="r-arm"
     style={{
         width: '70px',
         height: "10px",
@@ -36,7 +36,7 @@ const R_ARM = (
     }} />
 )
 const L_ARM = (
-    <div 
+    <div key= "l-arm"
     style={{
         width: '70px',
         height: "10px",
@@ -49,7 +49,7 @@ const L_ARM = (
     }} />
 )
 const R_Leg = (
-    <div 
+    <div key="r-leg"
     style={{
         width: '100px',
         height: "10px",
@@ -62,7 +62,7 @@ const R_Leg = (
     }} />
 )
 const L_Leg = (
-    <div 
+    <div key="l-leg"
     style={{
         width: '100px',
         height: "10px",

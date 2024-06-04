@@ -2,25 +2,20 @@ import {useCallback, useEffect, useState} from "react"
 import { HangmanDrawing } from "./HangmandDrawing"
 import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
-import './App.css';
-import words from "./wordList.json"
+import './App.css'
 
-///* API
-/*
-fetch('https://type.fit/api/quotes')
-			.then((response) => response.json())
-			.then((fetchedQuotes) => {
-				fetchedQuotes = fetchedQuotes.filter(quote => quote.text.length <= maxLength) 
-*/
+//use an API to generate random word with 5 characters
+async function getWord() {
+  const response = await fetch('https://random-word-api.herokuapp.com/word?length=5');
+  const words = await response.json();
 
-function getWord() {
-  return words [Math.floor(Math.random() * words.length)]
+  return words[0]; // The API returns an array with one word
 }
 
 //generate word to guess from wordList.json file
 function App () {
-  const [wordToGuess, setWordToGuess] = useState (getWord)
-  const [guessedLetters, setGuessedLetters] = useState <string[]>([])
+  const [wordToGuess, setWordToGuess] = useState("")
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
   const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter))
 
@@ -32,10 +27,10 @@ function App () {
 
   //create array for guessed letters. No penalty for repeated letters, implement useCallback
   const addGuessedLetter = useCallback((letter: string) => {
-    if (guessedLetters.includes(letter) || isLoser || isWinner) return
+    if (guessedLetters.includes(letter) || isLoser || isWinner) return;
 
-    setGuessedLetters(currentLetters => [...currentLetters, letter])
-  }, [guessedLetters, isWinner, isLoser])
+    setGuessedLetters(currentLetters => [...currentLetters, letter]);
+  }, [guessedLetters, isWinner, isLoser]);
 
   //hook up keyboard to buttons 
   useEffect(() => {
@@ -53,31 +48,33 @@ function App () {
     return () => {
       document.removeEventListener("keypress", handler)
     }
-  }, [guessedLetters])
+  }, [guessedLetters]);
 
-  // load new game with Enter key 
-  const gameReset = () => {
-    setGuessedLetters([])
-      setWordToGuess(getWord())
-  }
-  
-  useEffect(()=> {
-    const handler = (e: KeyboardEvent) => {
-      const key = e.key
+  // reset game
+  const gameReset = useCallback(async () => {
+    setGuessedLetters([]);
+    const newWord = await getWord();
+    setWordToGuess(newWord);
+  }, []);
 
-      if (key !== "Enter") return
+  useEffect(() => {
+    gameReset();
+  }, [gameReset]);
 
-      e.preventDefault()
-      gameReset()
-    }
+ //reload game with enter key 
+ useEffect(() => {
+  const handler = (e: KeyboardEvent) => {
+    const key = e.key;
+    if (key !== "Enter") return;
+    e.preventDefault();
+    gameReset();
+  };
+  document.addEventListener("keypress", handler);
+  return () => {
+    document.removeEventListener("keypress", handler);
+  };
+}, [gameReset]);
 
-    document.addEventListener("keypress", handler )
-
-    return () => {
-      document.removeEventListener("keypress", handler)
-    }
-  })
-  
 // rest of page 
   return (
     <div style ={{
@@ -92,7 +89,7 @@ function App () {
     >
     <div style = {{ fontSize: "2rem", textAlign: "center"}}>
       {isWinner && "You Win!🎉"} 
-      {isLoser && "You lost, Nice Try. Press 'Enter' to try again"}
+      {isLoser && "You lost. Try again"}
     </div>
      <HangmanDrawing numberOfGuesses={incorrectLetters.length}/> 
      <HangmanWord reveal= {isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess} />
