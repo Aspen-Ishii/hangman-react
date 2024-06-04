@@ -1,2 +1,2 @@
 # hangman-react
-Hangman game using React and Typescript
+Hangman game created using React and Typescript. Includes random word API.
