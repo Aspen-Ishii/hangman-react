@@ -1,0 +1,28 @@
+  
+
+
+  .new-game-button {
+    margin-top: 2rem;
+    display: flex;
+    padding: 0.4em .5em 0.3em .5em;
+    border: 3px solid #53565a;
+    color: #53565a;
+    background: lighten(#7ba7bc, 30%);
+    box-shadow: 4px 4px 0 0 #7ba7bc;
+    position: relative;
+	overflow: hidden;
+	transform-origin: bottom right;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    padding: .5rem;
+    font-weight: bold;
+    cursor: pointer;
+    font-Family: 'Rubik Mono One', helvetica;
+}
+
+.new-game-button:hover {
+    background-color: #ffd100;
+    transform: translate(-1px, -1px);
+	box-shadow: 6px 6px 0 0 #7ba7bc;
+  }
+

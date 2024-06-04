@@ -1,5 +1,6 @@
 import styles from "./Keyboard.module.css"
 //create array for letters
+
 const KEYS = "abcdefghijklmnopqrstuvwxyz".split("");
 
 type KeyboardProps = {

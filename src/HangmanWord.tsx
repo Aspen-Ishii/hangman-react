@@ -13,7 +13,7 @@ export function HangmanWord({guessedLetters, wordToGuess, reveal= false}: Hangma
             fontSize: "6rem",
             fontWeight: "bold",
             textTransform: "uppercase",
-            fontFamily: 'Rubik Mono One',
+            fontFamily: 'Rubik Mono One, helvetica',
             color: "#53565a",
         }}>
 {/* render the wordToGuess by slitting it apart into its individual letters.
@@ -26,7 +26,7 @@ note: Index is the unique id for the word and thus can be used as an exception f
                     visibility: guessedLetters.includes(letter) || reveal
                     ? "visible" 
                     : "hidden",
-                    color: !guessedLetters.includes(letter) && reveal ? "red" : "black",
+                    color: !guessedLetters.includes(letter) && reveal ? "red" : "#53565a",
                 }}
                 >
                 {letter}

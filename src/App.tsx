@@ -2,7 +2,16 @@ import {useCallback, useEffect, useState} from "react"
 import { HangmanDrawing } from "./HangmandDrawing"
 import { HangmanWord } from "./HangmanWord"
 import { Keyboard } from "./Keyboard"
+import './App.css';
 import words from "./wordList.json"
+
+///* API
+/*
+fetch('https://type.fit/api/quotes')
+			.then((response) => response.json())
+			.then((fetchedQuotes) => {
+				fetchedQuotes = fetchedQuotes.filter(quote => quote.text.length <= maxLength) 
+*/
 
 function getWord() {
   return words [Math.floor(Math.random() * words.length)]
@@ -46,6 +55,12 @@ function App () {
     }
   }, [guessedLetters])
 
+  // load new game with Enter key 
+  const gameReset = () => {
+    setGuessedLetters([])
+      setWordToGuess(getWord())
+  }
+  
   useEffect(()=> {
     const handler = (e: KeyboardEvent) => {
       const key = e.key
@@ -53,8 +68,7 @@ function App () {
       if (key !== "Enter") return
 
       e.preventDefault()
-      setGuessedLetters([])
-      setWordToGuess(getWord())
+      gameReset()
     }
 
     document.addEventListener("keypress", handler )
@@ -73,15 +87,16 @@ function App () {
       gap: "2rem",
       margin: "0 auto",
       alignItems: "center",
+      maxWidth: "50rem",
     }}
     >
     <div style = {{ fontSize: "2rem", textAlign: "center"}}>
-      {isWinner && "Winner! Refresh to try again"} 
-      {isLoser && "Nice Try. Refresh to try again"}
+      {isWinner && "You Win!🎉"} 
+      {isLoser && "You lost, Nice Try. Press 'Enter' to try again"}
     </div>
      <HangmanDrawing numberOfGuesses={incorrectLetters.length}/> 
      <HangmanWord reveal= {isLoser} guessedLetters={guessedLetters} wordToGuess={wordToGuess} />
-      <div className="container" style={{alignSelf: "stretch"}}>
+      <div className="container" style={{alignSelf: "stretch" }}>
         <Keyboard 
         disabled = {isWinner || isLoser}
         activeLetters={guessedLetters.filter(letter => wordToGuess.includes(letter)
@@ -90,7 +105,8 @@ function App () {
         addGuessedLetter={addGuessedLetter}
          />
       </div>
-      <button id="new-game">New game</button>
+      <button onClick={gameReset} id="new-game" className="new-game-button">
+        New game</button>
     </div>
   )
 }
